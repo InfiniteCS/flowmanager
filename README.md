@@ -1,4 +1,4 @@
-# ![Flow Manager](https://github.com/radhika-s/images/blob/master/flowmanager/flowmanager_logo.png)
+# [![Flow Manager](https://github.com/radhika-s/images/blob/master/flowmanager/flowmanager_logo.png)] (https://github.com/InfiniteCS/flowmanager)
 
 ## What is Flow Manager?
 Flow Manager is a northbound application sub-system that can be used by Network Administrators or Traffic Monitoring & Optimization applications to push fine-grained and customized  flows to OpenFlow enabled devices in the SDN network. Flow Manager currently supports Openflow ver 1.3.4.  
@@ -10,7 +10,7 @@ Flow Manager is a northbound application sub-system that can be used by Network 
 + Supports REST APIs that enable simple integration into SDN controllers
 + View the flow structure in the form of JSON for validation
 
-![Flow Manager Design](https://github.com/radhika-s/images/blob/master/flowmanager/flowmanager_design.png)
+[![Flow Manager Design](https://github.com/radhika-s/images/blob/master/flowmanager/flowmanager_design.png)] (https://github.com/InfiniteCS/flowmanager)
 
 ##Prerequisites:
 Following are the softwares/packages required for Flow Manager Applicaiton
@@ -91,7 +91,7 @@ Send questions or feedback to: `Akshil.Verma@infinite.com` or `Dhanasekar.Kandas
 Found any issue or suggest any enhancement, [Click here.](https://github.com/InfiniteCS/flowmanager/issues/new)
 
 favorite.png
-## ![Pro Edition](https://github.com/radhika-s/images/blob/master/flowmanager/favorite.png "Flow Manager Pro Edition")Flow Manager Pro Edition:
+## [![Pro Edition](https://github.com/radhika-s/images/blob/master/flowmanager/favorite.png "Flow Manager Pro Edition")] (https://github.com/InfiniteCS/flowmanager) Flow Manager Pro Edition:
 
 > **Pro Editon Featues:**
 >
