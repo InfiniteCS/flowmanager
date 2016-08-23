@@ -102,3 +102,11 @@ favorite.png
 > **Pro Edition Contact:**
 >
 > - Radhika Sampath : `sRadhika@infinite.com` or `sales@infinite.com`
+
+## Flow Manager User Interface (UI)
+
+[![Flow Manager Design](https://github.com/radhika-s/images/blob/master/flowmanager/connect_controller_UI.png)] (https://github.com/InfiniteCS/flowmanager)
+
+[![Flow Manager Design](https://github.com/radhika-s/images/blob/master/flowmanager/create_flow_UI.png)] (https://github.com/InfiniteCS/flowmanager)
+
+[![Flow Manager Design](https://github.com/radhika-s/images/blob/master/flowmanager/delete_flow_UI.png)] (https://github.com/InfiniteCS/flowmanager)
