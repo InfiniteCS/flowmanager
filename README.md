@@ -22,7 +22,7 @@ Following are the softwares/packages required for Flow Manager Applicaiton
 ```
 + NPM
 
-> **Note:** should install latest version with nodejs installation. If not, use the following.
+> **Note:** should install latest version with nodejs installation. If not, use the following. (Use sudo if required)
 
 ```
   $ sudo npm install npm@latest -g
@@ -31,9 +31,13 @@ Following are the softwares/packages required for Flow Manager Applicaiton
 ```
   $ npm install bower -g
 ```
++ Gulp
+```
+  $ npm install gulp -g 
+```
 + Confirm installation:
 ```
-  $ node -v && npm -v && bower -v
+  $ node -v && npm -v && bower -v && gulp -v
 ```
 ## Installation:
 ```
@@ -86,7 +90,8 @@ Send questions or feedback to: `Akshil.Verma@infinite.com` or `Dhanasekar.Kandas
 
 Found any issue or suggest any enhancement, [Click here.](https://github.com/InfiniteCS/flowmanager/issues/new)
 
-## Flow Manager Pro Edition:
+favorite.png
+## ![Pro Edition](https://github.com/radhika-s/images/blob/master/flowmanager/favorite.png "Flow Manager Pro Edition")Flow Manager Pro Edition:
 
 > **Pro Editon Featues:**
 >
