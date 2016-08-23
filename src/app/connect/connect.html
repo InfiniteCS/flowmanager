@@ -1,0 +1,51 @@
+<!-- Connect to SDN Controller -->   
+<form name="connect.connectForm" novalidate ng-init="connect.init()" class="md-padding page-content">
+    <h1 class = "md-title" ><b>CONNECT SDN CONTROLLER</b></h1>
+    <div layout="row" layout-margin layout-padding layout-wrap layout-fill>
+        <md-input-container flex>
+            <label>IP *</label>
+            <input ng-model="connect.IP" style="width:140px;" name="IP" ng-change="connect.onChange('IP')" required>
+        </md-input-container> 
+	<md-input-container flex>
+            <label>Port *</label>
+            <input ng-model="connect.port" style="width:70px;" name="port" ng-change="connect.onChange('port')" required>
+        </md-input-container>
+	<md-input-container flex>
+            <label>Username *</label>
+            <input ng-model="connect.username" style="width:140px;" name="username" ng-change="connect.onChange('username')" required>
+        </md-input-container>
+	<md-input-container flex>
+            <label>Password *</label>
+            <input ng-model="connect.password" type="password" style="width:140px;" name="password" ng-change="connect.onChange('password')" required>
+        </md-input-container>
+        <md-input-container flex>
+            <label>Controller Type *</label>
+	    <md-select ng-model="connect.controller[0].controllerConfig.type" name="controllerType" ng-change="connect.onChange('type')" ng-required="true">
+	        <md-option ng-repeat="types in connect.controller[0].name" ng-value="types.title" >
+                    {{types.title}}
+                </md-option>
+	    </md-select>
+        </md-input-container>
+    </div>
+
+    <div layout="row" layout-align="center center">
+        <md-button class="md-raised md-accent" ng-click="connect.connectToController($event)" ng-disabled="connect.connectForm.$invalid">CONNECT</md-button>
+        <md-button class="md-raised md-accent" ng-click="connect.clearForm($event)">CLEAR</md-button>
+    </div>
+</form>
+
+<div layout="row" layout-align="center center" >
+    <table id="table" class="table table-hover table-bordered" ng-table="connect.table" flex=25>
+        <thead>
+            <tr>
+                <th>Switch ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="i in [] | range:connect.arrayLength | orderBy:'-toString()'">
+                <td ng-click="connect.switchStorage(connect.switchID[i])">{{connect.switchID[i]}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

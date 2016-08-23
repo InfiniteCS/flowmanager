@@ -1,0 +1,457 @@
+<form name="createFlow.createFlowForm" novalidate ng-init = "createFlow.init()">
+
+    <md-content flex="" class="md-padding page-content">
+
+        <div layout="row">
+            <h1 class = "md-title" flex = "80"><b>CREATE FLOWS</b></h1>
+            <md-input-container>
+	        <label>Switch ID *</label>
+                <md-select ng-model="createFlow.switchID"  name="switchID" class="md-padding" ng-required="true" required>
+	            <md-option ng-repeat="switch in createFlow.switchIDList | orderBy:'toString()'" ng-value="switch" ng-selected = "{{ switch == createFlow.switchIDChosen ? 'true' : '' }}">
+                        {{switch}}
+                    </md-option>
+	        </md-select>
+            </md-input-container>
+        </div>
+
+        <div layout="row">
+            <div layout="column" flex = "80">
+
+                <div layout="row" layout-margin layout-padding layout-wrap layout-align="center center">
+                    <md-input-container flex>
+                        <label>Flow Name *</label>
+                        <input ng-model="createFlow.flowName" style="width:140px;" name="flowName" required>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Priority *</label>
+                        <input ng-model="createFlow.priority" style="width:100px;" name="priority" required>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label>Table ID *</label>
+                        <input ng-model="createFlow.tableID" style="width:70px;" name="tableID"  required>
+                    </md-input-container>
+	            <md-input-container flex>
+                        <label>Flow ID *</label>
+                        <input ng-model="createFlow.flowID" style="width:100px;" name="flowID" required>
+                    </md-input-container>
+                </div>
+
+                <div layout="row" layout-margin layout-padding layout-wrap layout-align="center center">
+                    <md-input-container flex>
+                        <label>Hard Timeout</label>
+                        <input ng-model="createFlow.hardTimeout" style="width:140px;">
+                    </md-input-container>
+        	    <md-input-container flex>
+                        <label>Idle Timeout</label>
+                        <input ng-model="createFlow.idleTimeout" style="width:100px;">
+                    </md-input-container>
+        	    <md-input-container flex>
+                        <label>Cookie</label>
+                        <input ng-model="createFlow.cookie" style="width:70px;">
+                    </md-input-container>
+        	    <md-input-container flex>
+                        <label>Cookie Mask</label>
+                        <input ng-model="createFlow.cookieMask" style="width:100px;">
+                    </md-input-container>
+                </div>
+            </div>
+
+            <md-card layout-align="end start" layout-margin>
+    	        <md-switch ng-model="createFlow.strictSwitch" md-no-ink flex >
+	            <label>Strict</label>
+                </md-switch>
+                <md-switch ng-model="createFlow.barrierSwitch" md-no-ink flex>
+	            <label>Barrier</label>
+                </md-switch>
+	        <md-switch ng-model="createFlow.installHwSwitch" md-no-ink flex>
+	            <label>InstallHw</label>
+                </md-switch>
+           </md-card>
+        </div>
+
+        <div class="md-whiteframe-1dp">
+            <label ng-model="createFlow.matchCollapsed" ng-click="createFlow.ifMatchCollapsed()" class = "md-subhead"  ng-if="!createFlow.matchCollapsed" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
+                <strong>MATCH</strong>
+	        <md-icon md-svg-src="assets/icons/ic_expand_more_24px.svg" ng-style="{'fill':'white'}"></md-icon>
+            </label>
+            <label ng-model="createFlow.matchCollapsed" ng-click="createFlow.ifMatchCollapsed()" class = "md-subhead md-whiteframe-4dp" ng-if="createFlow.matchCollapsed" ng-class="{'expandcollapse-heading-collapsed': !active, 'expandcollapse-heading-expanded': active}">
+                <strong>MATCH</strong>
+	        <md-icon md-svg-src="assets/icons/ic_expand_less_24px.svg" ng-style="{'fill':'white'}"></md-icon>
+            </label>
+        
+            <div ng-show="createFlow.matchCollapsed" class="slide">
+                <md-tabs md-dynamic-height md-border-bottom>
+
+                    <md-tab label="Pipeline">
+                        <md-content class="md-padding">
+                            <h1 class = "md-subhead">Pipeline Match Fields</h1>
+                            <div layout="row" layout-margin layout-wrap layout-align="center center">
+                                <md-input-container flex="25">
+                                    <label>Switch Input Port</label>
+                                    <input ng-model="createFlow.inPort" style="width:200px;">
+                                </md-input-container>
+				<md-input-container flex="25">
+		                    <label>Metadata</label>
+		                    <input ng-model="createFlow.metadata" style="width:200px;">
+		                </md-input-container>
+		                <md-input-container flex="25">
+		                    <label>Metadata Mask</label>
+		                    <input ng-model="createFlow.metadataMask" style="width:200px;">
+		                </md-input-container>
+
+                                <md-input-container flex="25">
+		                    <label>Tunnel ID</label>
+		                    <input ng-model="createFlow.tunnelId" style="width:200px;">
+		                </md-input-container>
+                            </div>
+                        </md-content>
+	            </md-tab>
+
+                    <md-tab label="Ethernet">
+                        <md-content class="md-padding">
+                            <h1 class = "md-subhead">Ethernet Headers</h1>
+                            <div layout="row" layout-margin layout-wrap >
+                                <md-input-container flex>
+                                    <label>Source MAC Address</label>
+                                    <input ng-model="createFlow.sourceMAC" style="width:150px;">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Destination MAC Address</label>
+                                    <input ng-model="createFlow.destMAC" style="width:200px;">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Ethernet Frame Type</label>
+                                    <input ng-model="createFlow.ethType" style="width:150px;">
+                                </md-input-container>
+                            </div>
+                            <div layout="row" layout-margin layout-wrap >
+                                <md-input-container flex>
+                                    <label>VLAN ID</label>
+                                    <input ng-model="createFlow.vlanId" style="width:150px;">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>VLAN Priority</label>
+                                    <input ng-model="createFlow.vlanPriority" style="width:200px;">
+                                </md-input-container>
+                                <md-switch ng-model="createFlow.vlanSwitch" md-no-ink flex>
+                                    <label>VLAN ID present?</label>
+                                </md-switch>
+                            </div>
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="IP">
+                        <md-content class="md-padding">
+                            <h1 class = "md-subhead">IP Headers</h1>
+                            <div layout="row" layout-align="center center" layout-margin layout-wrap>
+				<md-input-container flex="25">
+		                    <label>IP Protocol</label>
+		                    <input ng-model="createFlow.ipProtocol" style="width:150px;">
+		                </md-input-container>
+                                <md-input-container>
+                                    <label>IP Types</label>
+				    <md-select ng-model="createFlow.IPtypes[0].IPconfig.type" class="md-padding">
+                                        <md-option ng-repeat="IP in createFlow.IPtypes[0].IPtype" ng-value="IP.id">
+                                            {{IP.title}}
+                                        </md-option>
+	  	                    </md-select>
+                                </md-input-container>
+			    </div>
+	  	            <div layout="row" layout-align="center center" layout-margin layout-wrap>
+                                <md-input-container flex="25" ng-if="createFlow.IPtypes[0].IPconfig.type == 'ipv4'">
+		                    <label>Source IPv4 Address</label>
+		                    <input ng-model="createFlow.ipv4Source" style="width:220px;">
+		                </md-input-container>
+                                <md-input-container flex="25" ng-if="createFlow.IPtypes[0].IPconfig.type == 'ipv4'">
+		                    <label>Destination IPv4 Address</label>
+		                    <input ng-model="createFlow.ipv4Destination" style="width:220px;">
+		                </md-input-container>
+                                <md-input-container flex="25" ng-if="createFlow.IPtypes[0].IPconfig.type == 'ipv6'">
+		                    <label>Source IPv6 Address</label>
+		                    <input ng-model="createFlow.ipv6Source" style="width:220px;">
+		                </md-input-container>
+                                <md-input-container flex="25" ng-if="createFlow.IPtypes[0].IPconfig.type == 'ipv6'">
+		                    <label>Destination IPv6 Address</label>
+                                    <input ng-model="createFlow.ipv6Destination" style="width:220px;">
+		                </md-input-container>
+                                <md-input-container flex="25" ng-if="createFlow.IPtypes[0].IPconfig.type == 'ipv4'">
+		                    <label>IP DSCP</label>
+		                    <input ng-model="createFlow.ipDSCP" style="width:150px;">
+		                </md-input-container>
+                                <md-input-container flex="25" ng-if="createFlow.IPtypes[0].IPconfig.type == 'ipv4'">
+		                    <label>IP ECN</label>
+		                    <input ng-model="createFlow.ipECN" style="width:150px;">
+		                </md-input-container>
+				<md-input-container flex="25" ng-if="createFlow.IPtypes[0].IPconfig.type == 'ipv6'">
+		                    <label>IPv6 Label</label>
+		                    <input ng-model="createFlow.ipv6Label" style="width:150px;">
+		                </md-input-container>
+		                <md-input-container flex="25" ng-if="createFlow.IPtypes[0].IPconfig.type == 'ipv6'">
+		                    <label>IPv6 Ext Header</label>
+		                    <input ng-model="createFlow.ipv6ExtHeader" style="width:150px;">
+		                </md-input-container>
+                            </div>
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Transport">
+                        <md-content class="md-padding">
+   		            <h1 class = "md-subhead">Transport Headers</h1>
+		            <div layout="row" layout-align="center center" layout-margin layout-wrap>
+                                <md-input-container flex="25">
+		                    <label>TCP Source Port</label>
+		                    <input ng-model="createFlow.tcpSourcePort" style="width:200px;">
+		                </md-input-container>
+                                <md-input-container flex="25">
+		                    <label>TCP Destination Port</label>
+		                    <input ng-model="createFlow.tcpDestPort" style="width:200px;">
+		                </md-input-container>
+                                <md-input-container flex="25">
+		                    <label>UDP Source Port</label>
+		                    <input ng-model="createFlow.udpSourcePort" style="width:200px;">
+		                </md-input-container>
+                                <md-input-container flex="25">
+		                    <label>UDP Destination Port</label>
+		                    <input ng-model="createFlow.udpDestPort" style="width:200px;">
+		                </md-input-container>
+                            </div>
+                        </md-content>
+                    </md-tab>
+		    <md-tab label="ICMP">
+                        <md-content class="md-padding">
+   		            <h1 class = "md-subhead">ICMP Headers</h1>
+		            <div layout="row" layout-align="center center" layout-margin layout-wrap>
+			        <md-input-container flex="25">
+		                    <label>ICMPv4 Type</label>
+		                    <input ng-model="createFlow.icmpv4Type" style="width:200px;">
+		                </md-input-container>
+		                <md-input-container flex="25">
+		                    <label>ICMPv4 Code</label>
+		                    <input ng-model="createFlow.icmpv4Code" style="width:200px;">
+		                </md-input-container>
+		                <md-input-container flex="25">
+		                    <label>ICMPv6 Type</label>
+		                    <input ng-model="createFlow.icmpv6Type" style="width:200px;">
+		                </md-input-container>
+		                <md-input-container flex="25">
+		                    <label>ICMPv6 Code</label>
+		                    <input ng-model="createFlow.icmpv6Code" style="width:200px;">
+		                </md-input-container>
+                            </div>
+			</md-content>
+		    </md-tab>
+		    <md-tab label="ARP">
+                        <md-content class="md-padding">
+   		            <h1 class = "md-subhead">ARP Headers</h1>
+		            <div layout="row" layout-align="center center" layout-margin layout-wrap>
+				<md-input-container flex="25">
+		                    <label>ARP Operation</label>
+		                    <input ng-model="createFlow.arpOP" style="width:200px;">
+		                </md-input-container>
+				<md-input-container flex="25">
+		                    <label>ARP Source Transport Address</label>
+		                    <input ng-model="createFlow.arpSourceTransportAddress" style="width:200px;">
+		                </md-input-container>
+		                <md-input-container flex="25">
+		                    <label>ARP Target Transport Address</label>
+		                    <input ng-model="createFlow.arpTargetTransportAddress" style="width:200px;">
+		                </md-input-container>
+		                <md-input-container flex="25">
+		                    <label>ARP Source Hardware Address</label>
+		                    <input ng-model="createFlow.arpSourceHardwareAddress" style="width:200px;">
+		                </md-input-container>
+		                <md-input-container flex="25">
+		                    <label>ARP Target Hardware Address</label>
+		                    <input ng-model="createFlow.arpTargetHardwareAddress" style="width:200px;">
+		                </md-input-container>
+                            </div>
+			</md-content>
+		    </md-tab>
+		    <md-tab label="MPLS">
+                        <md-content class="md-padding">
+   		            <h1 class = "md-subhead">MPLS Headers</h1>
+		            <div layout="row" layout-align="center center" layout-margin layout-wrap>
+				<md-input-container flex="25">
+		                    <label>MPLS Label</label>
+		                    <input ng-model="createFlow.mplsLabel" style="width:200px;">
+		                </md-input-container>
+		                <md-input-container flex="25">
+		                    <label>MPLS Traffic Class</label>
+		                    <input ng-model="createFlow.mplsTC" style="width:200px;">
+		                </md-input-container>
+		                <md-input-container flex="25">
+		                    <label>MPLS Bottom of Stack</label>
+		                    <input ng-model="createFlow.mplsBOS" style="width:200px;">
+		                </md-input-container>
+                            </div>
+			</md-content>
+		    </md-tab>
+                    
+                </md-tabs>
+            </div>
+
+        </div>        <!-- match end -->
+
+        <div class="md-whiteframe-1dp">
+            <label ng-model="createFlow.actionCollapsed" ng-click="createFlow.ifActionCollapsed()" class = "md-subhead" ng-if="!createFlow.actionCollapsed" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
+                <strong>ACTION</strong>
+	        <md-icon md-svg-src="assets/icons/ic_expand_more_24px.svg" ng-style="{'fill':'white'}"></md-icon>
+            </label>
+            <label ng-model="createFlow.actionCollapsed" ng-click="createFlow.ifActionCollapsed()" class = "md-subhead md-whiteframe-4dp" ng-if="createFlow.actionCollapsed" ng-class="{'expandcollapse-heading-collapsed': !active, 'expandcollapse-heading-expanded': active}">
+                <strong>ACTION</strong>
+	        <md-icon md-svg-src="assets/icons/ic_expand_less_24px.svg" ng-style="{'fill':'white'}"></md-icon>
+            </label>
+
+            <div ng-show="createFlow.actionCollapsed" class="slide">
+	        <md-content  layout="column">
+
+                    <div class="add-field" layout="row" layout-wrap layout-align="start center" layout-padding>
+                        <md-input-container flex=15>
+                            <label>Instruction</label>
+	                    <md-select ng-model="createFlow.addField.new" class = "span" style="min-width: 125px;">
+	                        <md-option ng-repeat="type in createFlow.addField.types" ng-value="type.name">
+                                    {{type.value}}
+                                </md-option>
+	                    </md-select>
+                        </md-input-container>
+                        <md-button class="md-fab md-mini" ng-click="createFlow.addNewField()" layout layout-align="center center" ng-disabled="createFlow.drop || ((createFlow.form.form_fields.length > 0) && (createFlow.addField.new === 'drop'))">
+                            <md-tooltip md-direction="top">
+                                Add Field
+                            </md-tooltip>
+	                    <md-icon md-svg-src="assets/icons/ic_add_24px.svg"></md-icon>
+	                </md-button>
+                    </div>
+
+                    <accordion close-others="createFlow.accordion.oneAtATime">
+	                <div ng:model="createFlow.form.form_fields" id="sortableAccordionGroups" ui-sortable="createFlow.sortableOptions">
+	                    <accordion-group heading="{{field.field_title}}" ng:repeat="field in createFlow.form.form_fields"  ng:model="createFlow.form.form_fields" class="item" >
+
+	                        <div class="accordion-edit">
+                                    <md-button type="button" class="md-fab md-mini md-warn pull-right" ng-click="createFlow.deleteField(field.field_id)">
+		                         <md-icon md-svg-src="assets/icons/ic_delete_24px.svg" ng-style="{'fill':'white'}"></md-icon>
+                                    </md-button>
+
+		                    <div ng-if="createFlow.showAddOptions(field)" layout="row" layout-align="start center" layout-margin layout-wrap layout-padding>
+                                        <md-input-container>
+                                            <label>Action Select *</label>
+		                            <md-select ng-model="field.field_options[0].output" name="actionOptions" class = "span2 md-padding" required>
+		  	                        <md-option ng-repeat="option in field.field_options[0].output_to" ng-value="option.id" ng-selected="options == option">
+                                                    {{option.title}}
+                                                </md-option>
+	  	                            </md-select>
+                                        </md-input-container>
+		                        <md-input-container ng-if="createFlow.action_output(field.field_options[0].output)">
+		                            <label>Port *</label>
+            		                    <input ng-model="field.field_options[0].Physical_port.port" style="width:140px;" required name="port" class = "md-padding" >
+		                        </md-input-container>
+			                <md-input-container>
+		                            <label>Max Length</label>
+            		                    <input ng-model="field.field_options[0].Max_len" style="width:100px;" name="maxlen" class = "span4 md-padding">
+		                        </md-input-container>
+		                    </div>
+
+                                    <div ng-if="createFlow.showGoToTable(field)" layout="row" class = "md-padding span"  layout-align="center center" layout-margin layout-wrap>
+			                <md-input-container flex >
+		                            <label>Table ID</label>
+            		                    <input ng-model="field.field_goToTable[0].tableID" style="width:140px;" name="goToTable_tableID" >
+		                        </md-input-container>
+		                    </div>
+
+		                    <div ng-if="createFlow.showPushVlan(field)" layout="row" class = "md-padding span"  layout-align="center center" layout-margin layout-wrap>
+		                        <md-input-container flex >
+		                            <label>Ethernet Type</label>
+            		                    <input ng-model="field.field_pushVlan[0].ethernetType" style="width:140px;" name="pushvlan_ethernetType" >
+		                        </md-input-container>
+			                <md-input-container flex>
+		                            <label>VLAN ID</label>
+            		                    <input ng-model="field.field_pushVlan[0].vlanId" style="width:140px;" name="pushvlan_vlanId" >
+		                        </md-input-container>
+			                <md-switch ng-model="field.field_pushVlan[0].vlanPresent" md-no-ink flex>
+			                    <label>VLAN ID present?</label>
+			                </md-switch>
+		                    </div>
+
+		                    <div ng-if="createFlow.showPushMpls(field)" layout="row" class = "md-padding span"  layout-align="center center" layout-margin layout-wrap>
+		                        <md-input-container flex>
+		                            <label>Ethernet Type</label>
+            		                    <input ng-model="field.field_pushMpls[0].ethernetType" style="width:140px;" name="pushmpls_ethernetType" >
+		                        </md-input-container>
+			                <md-input-container flex>
+		                            <label>MPLS Label</label>
+            		                    <input ng-model="field.field_pushMpls[0].mplsLabel" style="width:140px;" name="pushmpls_label" >
+		                        </md-input-container>
+		                    </div>
+
+                                    <div ng-if="createFlow.showSwapMpls(field)" layout="row" class = "md-padding span"  layout-align="center center" layout-margin layout-wrap>
+		                        <md-input-container flex>
+		                            <label>MPLS Label</label>
+            		                    <input ng-model="field.field_swapMpls[0].mplsLabel" style="width:140px;" name="swapmpls_label" >
+		                        </md-input-container>
+		                    </div>
+
+		                    <div ng-if="createFlow.showPopMpls(field)" layout="row" class = "md-padding span"  layout-align="center center" layout-margin layout-wrap>
+			                <md-input-container flex >
+		                            <label>Ethernet Type</label>
+            		                    <input ng-model="field.field_popMpls[0].ethernetType" style="width:140px;" name="popmpls_ethernetType" >
+		                        </md-input-container>
+		                    </div>
+
+                                    <div ng-if="createFlow.showDrop(field)" layout="row" class = "md-padding span"  layout-align="center center" layout-margin layout-wrap>
+			                No field required
+		                    </div>
+
+	                        </div>        <!--accordion-edit end-->
+	                    </accordion-group>
+                        </div>
+                    </accordion>
+                </md-content>
+            </div>
+        </div>        <!--action end-->
+
+        <section layout="row" layout-align="center center" layout-wrap>
+            <md-button class="md-fab md-mini" ng-click="createFlow.pushFlow($event)" ng-disabled="createFlow.createFlowForm.$invalid">
+	        <md-tooltip md-direction="top">
+                    Push Flow
+                </md-tooltip>
+                <md-icon md-svg-src="assets/icons/ic_check_24px.svg"></md-icon>
+            </md-button>
+            <md-button class="md-fab md-mini" ng-click="createFlow.displayJSON($event)">
+	        <md-tooltip md-direction="top">
+                    Display JSON
+                </md-tooltip>
+                <md-icon md-svg-src="assets/icons/ic_launch_24px.svg"></md-icon>
+      	    </md-button>
+	    <md-button class="md-fab md-mini md-accent" ng-click="createFlow.clearForm($event)">
+	        <md-tooltip  md-direction="top">
+                    Clear Form
+                </md-tooltip>
+                <md-icon md-svg-src="assets/icons/ic_clear_24px.svg"></md-icon>
+      	    </md-button>
+            <md-button class="md-fab md-mini" ng-click="createFlow.copyFlow($event)" ng-disabled="createFlow.isFlowNotReady">
+                <md-tooltip  md-direction="top">
+                    Copy Flow to Clipboard
+                </md-tooltip>
+                <md-icon md-svg-src="assets/icons/ic_content_copy_white_24px.svg"></md-icon>
+            </md-button>
+        </section>
+    </md-content>
+</form>
+
+
+<!-- accordion mirror script -->
+<script type="text/ng-template" id="template/accordion/accordion.html">
+    <div class="accordion" ng-transclude></div>
+</script>
+    
+<script type="text/ng-template" id="template/accordion/accordion-group.html">
+    <div class="accordion-group">
+        <div class="accordion-heading" ng-style="{'background-color':'#90caf9'}">
+            <a class="accordion-toggle" ng-click="$parent.createFlow.isElementDragged() || (isOpen = !isOpen)" accordion-transclude="heading">
+                {{heading}}
+            </a>
+        </div>
+        <div class="accordion-body" collapse="!isOpen">
+            <div class="accordion-inner" ng-transclude></div>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,53 @@
+<form novalidate ng-init = "getFlow.populateSwitchId()" name="getFlow.getFlowForm" class="md-padding page-content">
+    <h1 class = "md-title" ><b>MANAGE FLOWS</b></h1>
+    <div  layout="column" layout-align="center center">
+        <md-input-container flex=20>
+            <label>Switch ID</label>
+            <md-select ng-model="getFlow.switchID"  name="switchID" required>
+	        <md-option ng-repeat="switch in getFlow.switchIDList| orderBy:'toString()'" ng-value="switch">
+                    {{switch}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <div layout layout-align="center center"  class="md-padding">
+       	<md-button class="md-raised md-accent" ng-click="getFlow.getFlow($event)" ng-disabled="getFlow.getFlowForm.$invalid">
+            CONNECT
+        </md-button>
+        <md-button class="md-raised md-accent" ng-click="getFlow.clear($event)">
+            CLEAR
+        </md-button>
+    </div>
+
+    <div layout layout-align="start center" class="md-padding">
+        <table id="flowtable" class="table table-bordered" ng-table="getFlow.table" align="center">
+            <thead>
+                <tr>
+                    <th style="width:50px;"><b>Flow Id</b></th> 
+                    <th style="width:100px;"><b>Flow Name</b></th> 
+                    <th style="width:50px;"><b>Priority</b></th> 
+                    <th style="width:53px;"><b>Table Id</b></th> 
+                    <th style="width:300px;"><b>Match</b></th> 
+                    <th style="width:300px;"><b>Action</b></th>
+                    <th style="width:50px;"><b>Delete</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat = "i in [] | range:getFlow.count">
+                    <td>{{getFlow.flowID[i]}}</td> 
+                    <td>{{getFlow.flowName[i]}}</td> 
+                    <td>{{getFlow.priority[i]}}</td> 
+                    <td>{{getFlow.tableID[i]}}</td> 
+                    <td><pre ng-style='{"background-color":"white"}'>{{getFlow.match[i]}}</pre></td> 
+                    <td><pre ng-style='{"background-color":"white"}'>{{getFlow.action[i]}}</pre></td>
+                    <td>
+                        <md-button type="button" class="md-icon-button" ng-click="getFlow.flowIdDelete = getFlow.flowID[i]; getFlow.tableIdDelete = getFlow.tableID[i]; getFlow.deleteFlow($event)">
+			    <md-icon md-svg-src="assets/icons/ic_delete_24px.svg" ng-style="{'fill':'#F44336'}"></md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+
