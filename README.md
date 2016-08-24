@@ -90,7 +90,6 @@ Send questions or feedback to: `Akshil.Verma@infinite.com` or `Dhanasekar.Kandas
 
 Found any issue or suggest any enhancement, [Click here.](https://github.com/InfiniteCS/flowmanager/issues/new)
 
-favorite.png
 ## [![Pro Edition](https://github.com/radhika-s/images/blob/master/flowmanager/favorite.png "Flow Manager Pro Edition")] (https://github.com/InfiniteCS/flowmanager) Flow Manager Pro Edition:
 
 > **Pro Editon Features:**
