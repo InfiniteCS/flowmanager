@@ -92,7 +92,7 @@ Found any issue or suggest any enhancement, [Click here.](https://github.com/Inf
 
 ## [![Pro Edition](https://github.com/radhika-s/images/blob/master/flowmanager/favorite.png "Flow Manager Pro Edition")] (https://github.com/InfiniteCS/flowmanager) Flow Manager Pro Edition:
 
-> **Pro Editon Features:**
+> **Pro Edition Features:**
 >
 > - Support for All Match and Action fields (Based on OpenFlow ver 1.3.4)
 > - Edit Flow Support
